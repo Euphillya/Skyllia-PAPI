@@ -5,7 +5,10 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import fr.euphyllia.skyllia.api.SkylliaAPI;
 import fr.euphyllia.skyllia.api.skyblock.Island;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 import java.util.UUID;
@@ -39,6 +42,14 @@ public class PlaceholderProcessor {
             case "island_members_max_size" -> String.valueOf(island.getMaxMembers());
             case "island_members_size" -> String.valueOf(island.getMembers().size());
             case "island_rank" -> island.getMember(playerId).getRoleType().name();
+            case "island_tps" -> {
+                Player player = Bukkit.getPlayer(playerId);
+                if (player == null) yield String.valueOf(-1.0);
+                if (!SkylliaAPI.isWorldSkyblock(player.getWorld())) yield String.valueOf(-1.0);
+                double @Nullable [] value = SkylliaAPI.getTPS(player.getChunk());
+                if (value == null) yield String.valueOf(-1.0);
+                yield String.valueOf(value[0]);
+            }
             default -> "";
         };
     }

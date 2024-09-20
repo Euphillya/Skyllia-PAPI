@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "fr.euphyllia.skyllia_papi"
-version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 val papiRepo = "https://repo.extendedclip.com/content/repositories/placeholderapi/";
 val paperMC = "https://repo.papermc.io/repository/maven-public/";

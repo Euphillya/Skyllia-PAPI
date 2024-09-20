@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -18,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class PlaceholderProcessor {
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     private static final LoadingCache<CacheKey, String> cache = CacheBuilder.newBuilder()
             .expireAfterWrite(10, TimeUnit.SECONDS)
@@ -48,7 +51,7 @@ public class PlaceholderProcessor {
                 if (!SkylliaAPI.isWorldSkyblock(player.getWorld())) yield String.valueOf(-1.0);
                 double @Nullable [] value = SkylliaAPI.getTPS(player.getChunk());
                 if (value == null) yield String.valueOf(-1.0);
-                yield String.valueOf(value[0]);
+                yield df.format(value[0]);
             }
             default -> "";
         };

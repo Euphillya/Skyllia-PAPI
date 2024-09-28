@@ -4,7 +4,7 @@ This document describes the placeholder system used in [Skyllia](https://modrint
 
 ## Introduction
 
-The **Placeholder Processor** is a system that dynamically displays information related to islands, permissions, and game rules in the Skyllia game. These placeholders can be used in various interfaces to display player-specific and island-specific data.
+The **Placeholder Processor** is a system that dynamically displays information related to islands, permissions, ore generators, and game rules in the Skyllia game. These placeholders can be used in various interfaces to display player-specific and island-specific data.
 
 This system utilizes **PlaceholderAPI (PAPI)** to manage placeholders via the custom **SkylliaExpansion**.
 
@@ -45,6 +45,25 @@ This system utilizes **PlaceholderAPI (PAPI)** to manage placeholders via the cu
    - Use the command `/papi ecloud list` to list available expansions.
    - If necessary, install the Skyllia expansion via `/papi ecloud download Skyllia`, then `/papi reload`.
 
+### Optional: Integrate Skyllia-Ore
+
+**Skyllia-Ore** is an optional plugin that extends Skyllia by adding a placeholder for ore generators. You can find it on [GitHub](https://github.com/Euphillya/Skyllia-Ore).
+
+If **Skyllia-Ore** is installed, it unlocks the `%skyllia_ore%` placeholder, which displays the current ore generator in use on the player's island. If Skyllia-Ore is not installed, this placeholder will not function, but the rest of the Skyllia plugin will work as expected.
+
+#### Installation Steps:
+
+1. **Download Skyllia-Ore:**
+
+   - Download the latest release from [GitHub](https://github.com/Euphillya/Skyllia-Ore).
+   - Place the `.jar` file in your server's `plugins` folder.
+   - Restart the server to load Skyllia-Ore.
+
+2. **Verify Skyllia-Ore Integration:**
+
+   - Run `/papi reload` to reload PlaceholderAPI.
+   - Test Skyllia-Ore-specific placeholders like `%skyllia_ore%` to ensure proper functionality.
+
 ## Using Placeholders
 
 Placeholders are special strings that will be replaced with dynamic values. They generally follow this format:
@@ -72,6 +91,20 @@ Placeholders related to islands provide general information about a specific isl
 ```text
 Your island has a size of %skyllia_island_size% blocks.
 ```
+
+### Ore Generator Placeholder (Optional)
+
+If the **Skyllia-Ore** plugin is installed, the following placeholder will be available:
+
+- `%skyllia_ore%`: Displays the current ore generator in use on the player's island.
+
+**Example Usage:**
+
+```text
+Your current ore generator is %skyllia_ore%.
+```
+
+If the Skyllia-Ore plugin is not installed, this placeholder will not return any values.
 
 ### Permissions Placeholders
 
@@ -109,7 +142,7 @@ These placeholders allow you to check the status of a specific game rule on the 
 
 **Example:**
 
-```
+```text
 %skyllia_gamerule_DISABLE_FIRE_SPREADING%
 ```
 
@@ -249,6 +282,14 @@ To find out if fire spreading is disabled on the island:
 Fire spreading disabled: %skyllia_gamerule_DISABLE_FIRE_SPREADING%
 ```
 
+### Check the Ore Generator (Optional)
+
+If **Skyllia-Ore** is installed, you can check the name of the current ore generator:
+
+```text
+Your current ore generator is %skyllia_ore%.
+```
+
 ## Notes
 
 - **Case Sensitivity:** Placeholders are case-sensitive for role names, permission names, and game rule names. Use the EXACT names as defined in the tables above.
@@ -261,8 +302,5 @@ Fire spreading disabled: %skyllia_gamerule_DISABLE_FIRE_SPREADING%
 - **Reload PAPI:** `/papi reload` to reload PAPI configurations.
 - **Check Available Expansions:** `/papi list` to display the list of available expansions.
 - **Install the Skyllia Expansion:** If available on PAPI's cloud, use `/papi ecloud download skyllia` then `/papi reload`.
+- **Install the Skyllia-Ore Expansion:** If Skyllia-Ore is installed, test the ore generator placeholder with `/papi parse me %skyllia_ore%`.
 - **Test a Placeholder:** `/papi parse me %skyllia_island_size%` to test the placeholder directly in-game.
-
-## Conclusion
-
-The Skyllia placeholder system, integrated with PlaceholderAPI via the `SkylliaExpansion`, offers flexibility to display dynamic information about islands, roles, permissions, and game rules. By using correctly formatted placeholders and referring to this guide, you can customize your gaming experience and obtain the necessary information.

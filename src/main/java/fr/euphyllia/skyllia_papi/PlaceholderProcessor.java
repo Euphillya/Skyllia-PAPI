@@ -118,7 +118,7 @@ public class PlaceholderProcessor {
     private static String processPermissionsPlaceholder(Island island, UUID playerId, String placeholder) {
         String[] split = placeholder.split("_", 4);
         if (split.length < 4) {
-            return "Format de placeholder invalide";
+            return "Invalid placeholder format";
         }
 
         String roleTypeRaw = split[1];
@@ -132,7 +132,7 @@ public class PlaceholderProcessor {
             roleType = RoleType.valueOf(roleTypeRaw.toUpperCase());
             permissionsType = PermissionsType.valueOf(permissionTypeRaw.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return "Type de rôle ou de permission invalide";
+            return "Invalid role or permission type";
         }
 
         Permissions permissions;
@@ -148,10 +148,10 @@ public class PlaceholderProcessor {
                     permissions = PermissionsInventory.valueOf(permissionNameRaw.toUpperCase());
                     break;
                 default:
-                    return "Type de permissions invalide";
+                    return "Invalid permission type";
             }
         } catch (IllegalArgumentException e) {
-            return "Nom de permission invalide";
+            return "Invalid permission name";
         }
 
         PermissionRoleIsland permissionRoleIsland = PermissionRoleInIslandCache.getPermissionRoleIsland(
@@ -163,7 +163,7 @@ public class PlaceholderProcessor {
     private static String processGamerulePlaceholder(Island island, UUID playerId, String placeholder) {
         String[] split = placeholder.split("_", 2);
         if (split.length < 2) {
-            return "Format de placeholder invalide";
+            return "Invalid placeholder format";
         }
 
         String gameRuleRaw = split[1];
@@ -172,7 +172,7 @@ public class PlaceholderProcessor {
         try {
             gameRuleIsland = GameRuleIsland.valueOf(gameRuleRaw.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return "Règle de jeu invalide";
+            return "Invalid GameRule";
         }
 
         long permissionChecker = PermissionGameRuleInIslandCache.getGameruleInIsland(island.getId());

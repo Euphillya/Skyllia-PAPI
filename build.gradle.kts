@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "fr.euphyllia.skyllia_papi"
-version = "1.0.1"
+version = "1.0.2-dev"
 
 val papiRepo = "https://repo.extendedclip.com/content/repositories/placeholderapi/";
 val paperMC = "https://repo.papermc.io/repository/maven-public/";
@@ -25,7 +25,7 @@ repositories {
 dependencies {
     compileOnly("me.clip:placeholderapi:2.11.5")
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-    compileOnly("fr.euphyllia.skyllia:api:1.3")
+    compileOnly(files("./libs/Skyllia-1.0-73-all.jar"))
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")

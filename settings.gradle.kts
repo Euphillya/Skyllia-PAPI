@@ -1,2 +1,2 @@
-rootProject.name = "skyllia_papi"
+rootProject.name = "Expansion-skyllia"
 

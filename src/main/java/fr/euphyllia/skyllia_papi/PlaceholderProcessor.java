@@ -14,6 +14,7 @@ import fr.euphyllia.skyllia.api.skyblock.model.permissions.*;
 import fr.euphyllia.skyllia.cache.PermissionGameRuleInIslandCache;
 import fr.euphyllia.skyllia.cache.PermissionRoleInIslandCache;
 
+import fr.euphyllia.skylliaore.api.Generator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.Bukkit;
@@ -70,6 +71,10 @@ public class PlaceholderProcessor {
             return processPermissionsPlaceholder(island.get(), playerId, placeholder);
         } else if (placeholder.startsWith("gamerule")) {
             return processGamerulePlaceholder(island.get(), playerId, placeholder);
+        } else if (placeholder.startsWith("ore")) {
+            if (Bukkit.getPluginManager().getPlugin("SkylliaOre") != null) {
+                return processOrePlaceholder(island.get(), playerId, placeholder);
+            }
         }
 
         return "Not Supported";
@@ -173,6 +178,11 @@ public class PlaceholderProcessor {
         long permissionChecker = PermissionGameRuleInIslandCache.getGameruleInIsland(island.getId());
         PermissionManager permissionManager = new PermissionManager(permissionChecker);
         return String.valueOf(permissionManager.hasPermission(gameRuleIsland.getPermissionValue()));
+    }
+
+    private static String processOrePlaceholder(Island island, UUID playerId, String placeholder) {
+        Generator generator = fr.euphyllia.skylliaore.Main.getCache().getGeneratorIsland(island.getId());
+        return generator.name();
     }
 
     private record CacheKey(UUID playerId, String placeholder) {}

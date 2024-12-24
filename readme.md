@@ -1,3 +1,5 @@
+# ARCHIVED ! See : https://github.com/Euphillya/Skyllia/tree/dev/addons/PapiSkyllia
+
 # Skyllia Placeholder Processor
 
 This document describes the placeholder system used in [Skyllia](https://modrinth.com/plugin/skyllia), along with the different types of placeholders available, roles, permissions, and game rules.
